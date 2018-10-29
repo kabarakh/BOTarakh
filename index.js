@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-var cron = require('node-cron');
+const cron = require('node-cron');
 const client = new Discord.Client();
 const axios = require('axios');
 const configYaml = require('config-yaml');
@@ -12,14 +12,10 @@ const debug = (...args) => {
 
 const getRecentYoutubeUpload = () => {
     axios.get(`https://www.googleapis.com/youtube/v3/channels?forUsername=${config.services.youtube.username}&key=${config.services.youtube.apiKey}&part=contentDetails`)
-        .then(response => {
-            return response.data.items[0].contentDetails.relatedPlaylists.uploads;
-        })
-        .then(playlistId => {
-            return axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlistId}&key=${config.services.youtube.apiKey}`);
-        })
-        .then(response => {
-            const channel = client.channels.find(ch => ch.name === config.connections.discord.announcementChannel);
+        .then((response) => response.data.items[0].contentDetails.relatedPlaylists.uploads)
+        .then((playlistId) => axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlistId}&key=${config.services.youtube.apiKey}`))
+        .then((response) => {
+            const channel = client.channels.find((ch) => ch.name === config.connections.discord.announcementChannel);
             // Do nothing if the channel wasn't found on this server
             if (!channel) {
                 debug(`tried to announce message to channel ${config.connections.discord.announcementChannel}, but channel was not found.`);
@@ -34,7 +30,7 @@ const getRecentYoutubeUpload = () => {
 };
 
 client.on('ready', () => {
-    debug(`Logged in as ${client.user.tag}!`);
+    debug(`Logged in as ${client.user.tag}!`, 'geht das?');
 });
 
 client.login(config.connections.discord.loginKey);

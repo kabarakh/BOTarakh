@@ -1,7 +1,7 @@
 env:
   es6: true
   node: true
-extends: 'eslint:recommended'
+extends: 'eslint:all'
 parserOptions:
   ecmaVersion: 2015
 rules:
@@ -20,3 +20,14 @@ rules:
   eqeqeq:
     - error
     - always
+  strict:
+    - off
+  max-len:
+    - off
+  one-var:
+    - off
+  padded-blocks:
+    - off
+  dot-location:
+    - error
+    - property
