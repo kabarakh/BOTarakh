@@ -9,12 +9,13 @@
     "config-yaml": "^1.1.1",
     "discord.js": "^11.4.2",
     "eslint": "^5.8.0",
+    "lodash.foreach": "^4.5.0",
     "node-cron": "^2.0.3",
     "uws": "^99.0.0"
   },
   "scripts": {
-    "test": "eslint --ignore-pattern node_modules \"**/*.js\"",
-    "start": "node index.js"
+    "test": "eslint --ignore-pattern node_modules \"src/**\"",
+    "start": "node src/index.js"
   },
   "devDependencies": {
     "jest": "^23.6.0"
