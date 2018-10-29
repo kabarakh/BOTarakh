@@ -1,0 +1,3 @@
+connections:
+  twitch:
+    postAnnouncementsOnlyOnce: false

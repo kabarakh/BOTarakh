@@ -1,0 +1,5 @@
+imports:
+  - { resource: "connections/discord.yaml" }
+  - { resource: "connections/twitch.yaml" }
+  - { resource: "services/youtube.yaml" }
+  - { resource: "user.yaml" }

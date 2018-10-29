@@ -1,0 +1,8 @@
+connections:
+  discord:
+    loginKey: "<discord bot login key>"
+
+services:
+  youtube:
+    apiKey: "<google api key for youtube api>"
+    username: "<your youtube username>"
