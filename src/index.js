@@ -6,6 +6,7 @@ const cron = require('node-cron');
 const activeConnections = {};
 
 const sendAnnouncement = (message) => {
+    logger.toConsole('sending announcement');
     foreach(activeConnections, (connection) => connection.sendAnnouncement(message));
 };
 
@@ -24,10 +25,11 @@ foreach(config.getServiceConfig(), (serviceConfig, serviceName) => {
     const service = require(`./services/${serviceName}`); // eslint-disable-line global-require
     service.on('announcement', sendAnnouncement);
 
-    foreach(serviceConfig.announcements, (announcementConfig, announcementMethod) => {
-        // cron.schedule(announcementConfig.cronInterval, service[announcementMethod]);
-        setTimeout(service[announcementMethod], 3000);
-    });
+    foreach(serviceConfig.announcements, (announcementConfig, announcementMethodName) => {
+        const announcementMethod = service[announcementMethodName];
 
-    
+        cron.schedule(announcementConfig.cronInterval, () => {
+            announcementMethod.call(service);
+        });
+    });
 });

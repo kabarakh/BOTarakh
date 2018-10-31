@@ -36,3 +36,5 @@ rules:
     - off
   class-methods-use-this:
     - off
+  space-before-function-paren:
+    - off

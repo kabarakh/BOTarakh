@@ -6,19 +6,19 @@ const loadConfigurationIfNecessary = Symbol('loadConfigurationIfNecessary');
 
 class Configuration {
 
-    [loadConfigurationIfNecessary] () {
+    [loadConfigurationIfNecessary]() {
         if (Object.keys(config).length === 0) {
             config = configYaml('config/root.yaml');
         }
     }
 
-    getConnectionConfig () {
+    getConnectionConfig() {
         this[loadConfigurationIfNecessary]();
 
         return config.connections;
     }
 
-    getServiceConfig () {
+    getServiceConfig() {
         this[loadConfigurationIfNecessary]();
 
         return config.services;
