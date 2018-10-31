@@ -34,3 +34,5 @@ rules:
     - property
   no-magic-numbers:
     - off
+  class-methods-use-this:
+    - off

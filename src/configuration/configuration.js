@@ -2,20 +2,27 @@ const configYaml = require('config-yaml');
 
 let config = {};
 
-const loadConfigurationIfNecessary = () => {
-    if (Object.keys(config).length === 0) {
-        config = configYaml('config/root.yaml');
+const loadConfigurationIfNecessary = Symbol('loadConfigurationIfNecessary');
+
+class Configuration {
+
+    [loadConfigurationIfNecessary] () {
+        if (Object.keys(config).length === 0) {
+            config = configYaml('config/root.yaml');
+        }
     }
-};
 
-exports.getConnectionConfig = () => {
-    loadConfigurationIfNecessary();
+    getConnectionConfig () {
+        this[loadConfigurationIfNecessary]();
 
-    return config.connections;
-};
+        return config.connections;
+    }
 
-exports.getServiceConfig = () => {
-    loadConfigurationIfNecessary();
+    getServiceConfig () {
+        this[loadConfigurationIfNecessary]();
 
-    return config.services;
-};
+        return config.services;
+    }
+}
+
+module.exports = new Configuration();

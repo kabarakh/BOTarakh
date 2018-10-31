@@ -1,4 +1,3 @@
 connections:
   discord:
     announcementChannel: announcements
-    postAnnouncementsOnlyOnce: true
