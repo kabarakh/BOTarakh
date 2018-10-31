@@ -38,3 +38,5 @@ rules:
     - off
   space-before-function-paren:
     - off
+  no-useless-constructor:
+    - off

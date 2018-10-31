@@ -1,5 +1,4 @@
 const config = require('../configuration/configuration');
-const logger = require('../util/logger');
 const EventEmitter = require('events');
 const axios = require('axios');
 
