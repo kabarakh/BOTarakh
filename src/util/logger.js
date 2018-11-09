@@ -1,3 +1,3 @@
 exports.toConsole = (...args) => {
-    console.log(args); // eslint-disable-line no-console
+    console.log(new Date().format(), args); // eslint-disable-line no-console
 };

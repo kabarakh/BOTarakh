@@ -6,7 +6,6 @@ const cron = require('node-cron');
 const activeConnections = {};
 
 const sendAnnouncement = (message) => {
-    logger.toConsole('sending announcement');
     foreach(activeConnections, (connection) => connection.sendAnnouncement(message));
 };
 
@@ -27,7 +26,6 @@ foreach(config.getServiceConfig(), (serviceConfig, serviceName) => {
 
     foreach(serviceConfig.announcements, (announcementConfig, announcementMethodName) => {
         const announcementMethod = service[announcementMethodName];
-
         cron.schedule(announcementConfig.cronInterval, () => {
             announcementMethod.call(service);
         });

@@ -1,6 +1,10 @@
 connections:
   discord:
     loginKey: "<discord bot login key>"
+  twitch:
+    oauth: "<twitch oauth login string with oauth:>"
+    username: "<username to login with>"
+    clientId: "<twitch developer app client id>"
 
 services:
   youtube:
