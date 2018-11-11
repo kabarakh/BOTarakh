@@ -5,14 +5,20 @@
   "license": "GPL-2.0",
   "private": true,
   "dependencies": {
+    "@types/config-yaml": "^1.1.0",
+    "@types/lodash": "^4.14.118",
+    "@types/node": "^10.12.5",
+    "@types/node-cron": "^2.0.0",
     "axios": "^0.18.0",
     "config-yaml": "^1.1.1",
     "discord.js": "^11.4.2",
     "eslint": "^5.8.0",
-    "lodash.foreach": "^4.5.0",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "node-cron": "^2.0.3",
+    "ts-node": "^7.0.1",
     "twitch-js": "^1.2.15",
+    "typescript": "^3.1.6",
     "uws": "^99.0.0"
   },
   "scripts": {
