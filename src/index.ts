@@ -6,8 +6,8 @@ import ConnectionInterface from './connections/connectionInterface';
 
 const activeConnections: {[key: string]: ConnectionInterface} = {};
 
-const sendAnnouncement = (message: string) => {
-    forEach(activeConnections, (connection: ConnectionInterface) => connection.sendAnnouncement(message));
+const sendAnnouncement = (announcement: {message: string, onlySendOnce: boolean}) => {
+    forEach(activeConnections, (connection: ConnectionInterface) => connection.sendAnnouncement(announcement));
 };
 
 forEach(config.getConnectionConfig(), (connectionConfig, connectionName) => {

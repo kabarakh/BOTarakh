@@ -36,7 +36,7 @@ class Twitch implements ConnectionInterface {
             });
     }
 
-    public sendAnnouncement(message: string) {
+    public sendAnnouncement({message, onlySendOnce}: {message: string, onlySendOnce: boolean}) {
         this.twitchConfig.channels.forEach((channelName: string) => {
             logger.toConsole(`[connection.twitch] sending announcement to ${channelName}`);
             this.client.say(channelName, message);

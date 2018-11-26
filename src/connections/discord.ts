@@ -19,7 +19,7 @@ class Discord implements ConnectionInterface {
         this.client.login(this.discordConfig.loginKey);
     }
 
-    public sendAnnouncement(message: string) {
+    public sendAnnouncement({message, onlySendOnce}: {message: string, onlySendOnce: boolean}) {
         if (this.client.user) {
             this.discordConfig.announcementChannels.forEach((channelName: string) => {
                 const channel = (this.client.channels.find((ch: DiscordJs.TextChannel) => ch.name === channelName) as DiscordJs.TextChannel);
@@ -28,19 +28,23 @@ class Discord implements ConnectionInterface {
                     logger.toConsole(`[connection.discord] tried to announce message to channel ${channelName}, but channel was not found.`);
                     return;
                 }
+                if (onlySendOnce) {
                 // Get the last message by the bot from the announcement channel
-                channel.fetchMessages()
-                    .then((messages: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => messages.filter((foundMessage) => foundMessage.author.id === this.client.user.id))
-                    .then((filteredMessages: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => filteredMessages.filter((foundMessage) => foundMessage.content === message))
-                    .then((formerAnnouncements: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => {
-                        const formerAnnouncementsArray = formerAnnouncements.array();
-                        if (formerAnnouncementsArray.length > 0) {
-                            logger.toConsole(`[connection.discord] not sending announcement to channel ${channelName} because that message was sent already`);
-                        } else {
-                            logger.toConsole(`[connection.discord] sending announcement to channel ${channelName}`);
-                            channel.send(message);
-                        }
-                    });
+                    channel.fetchMessages()
+                        .then((messages: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => messages.filter((foundMessage) => foundMessage.author.id === this.client.user.id))
+                        .then((filteredMessages: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => filteredMessages.filter((foundMessage) => foundMessage.content === message))
+                        .then((formerAnnouncements: DiscordJs.Collection<DiscordJs.Snowflake, DiscordJs.Message>) => {
+                            const formerAnnouncementsArray = formerAnnouncements.array();
+                            if (formerAnnouncementsArray.length > 0) {
+                                logger.toConsole(`[connection.discord] not sending announcement to channel ${channelName} because that message was sent already`);
+                            } else {
+                                logger.toConsole(`[connection.discord] sending announcement to channel ${channelName}`);
+                                channel.send(message);
+                            }
+                        });
+                } else {
+                    channel.send(message);
+                }
             });
         }
     }
