@@ -1,19 +1,19 @@
-const config = require('../configuration/configuration');
-const EventEmitter = require('events');
-const axios = require('axios');
+import config, {YoutubeServiceConfig} from '../configuration/configuration';
+import {EventEmitter} from 'events';
+import axios from 'axios';
 
 const youtubeConfig = config.getServiceConfig().youtube;
 
 class Youtube extends EventEmitter {
 
-    constructor() {
+    public constructor() {
         super();
     }
 
-    recentUpload() {
+    public recentUpload() {
         axios.get(`https://www.googleapis.com/youtube/v3/channels?forUsername=${youtubeConfig.username}&key=${youtubeConfig.apiKey}&part=contentDetails`)
             .then((response) => response.data.items[0].contentDetails.relatedPlaylists.uploads)
-            .then((playlistId) => axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlistId}&key=${youtubeConfig.apiKey}`))
+            .then((playlistId: string) => axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlistId}&key=${youtubeConfig.apiKey}`))
             .then((response) => {
                 // Send the message
                 const youtubeData = response.data;

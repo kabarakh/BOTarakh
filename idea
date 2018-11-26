@@ -1,0 +1,9 @@
+* build with typescript and ts-node (/)
+* build upon rxjs
+* all connections are watching the chat with their own logic
+* on any message use central service to see if the command is something we need to answer
+* central service uses rxjs to send out messages
+** messages have type announcement, whisper or message
+** all connections subscribe to rxjs and if message is sent send to chat, person or announcement channels
+* config describes global and local prefixes (!, !youtube, !...), and also commands (command - method)
+* set interval to block spam (timer per command and user?)
