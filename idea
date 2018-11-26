@@ -7,3 +7,4 @@
 ** all connections subscribe to rxjs and if message is sent send to chat, person or announcement channels
 * config describes global and local prefixes (!, !youtube, !...), and also commands (command - method)
 * set interval to block spam (timer per command and user?)
+* use mongodb/mongoose to save persistent data
